@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>DeCargo-Pay</h2>
-    <form onsubmit="takeValue()">
+    <form onsubmit="takeValue(event)">
         <h4>Vendor Name?</h4>
         <input type="text" id = "vendor" name = 'vendor'>
         <h4>type?</h4>
@@ -19,11 +19,20 @@
         <h4>total amount?</h4>
         <input type="number" id = "totalAmount" name = 'totalAmount'>
 
+        <h4>item</h4>
+        <input type="text" id = "item" name = "item">
+ <h4>invoice</h4>
+        <input type="text" id = "invoice" name = "invoice">
+        <h4>payer</h4>
+        <input type="text" id = "payer" name = "payer">
+
         <label>
             <input type="submit">submit</input>
         </label>
 
     </form>
+    <img/>
+
 
 
 </body>
