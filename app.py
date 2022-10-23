@@ -22,8 +22,8 @@ def createInvoice():
     timestampHash = postedToIPFS['Timestamp']
     imageHash = postedToIPFS['IpfsHash']
     jsonHash = postToJSON.postToJSON(item, vendor, timestampHash,totalAmount,imageHash)
+    return imageHash
 
-    return jsonHash
 
 
 if __name__ == "__main__":

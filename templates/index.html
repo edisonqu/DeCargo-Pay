@@ -5,10 +5,24 @@
     <title>Title</title>
     <link rel = "stylesheet" href="{{url_for('static', filename='css/main.css')}}">
     <script type = "text/javascript" src="{{url_for('static', filename='script/main.js')}}"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"
+    integrity="sha512-5erpERW8MxcHDF7Xea9eBQPiRtxbse70pFcaHJuOhdEBQeAxGQjUwgJbuBDWve+xP/u5IoJbKjyJk50qCnMD7A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
 
 </head>
 <body>
 <h2>DeCargo-Pay</h2>
+    <button onclick="loginWithETH()" class = "Login">Login</button>
+        <p id="userAddress" class="text-gray-600"></p>
+        <button
+          id="logoutButton"
+          onclick="logout()"
+          class="hidden text-blue-500 underline">
+          Logout
+        </button>
     <form onsubmit="takeValue(event)">
         <h4>Vendor Name?</h4>
         <input type="text" id = "vendor" name = 'vendor'>
@@ -18,10 +32,9 @@
         <input type="number" id = "number" name = 'number'>
         <h4>total amount?</h4>
         <input type="number" id = "totalAmount" name = 'totalAmount'>
-
         <h4>item</h4>
         <input type="text" id = "item" name = "item">
- <h4>invoice</h4>
+        <h4>invoice</h4>
         <input type="text" id = "invoice" name = "invoice">
         <h4>payer</h4>
         <input type="text" id = "payer" name = "payer">
@@ -31,9 +44,74 @@
         </label>
 
     </form>
-    <img/>
 
 
+<script>
+ window.onload = async () => {
+      // Init Web3 connected to ETH network
+      if (window.ethereum) {
+        window.web3 = new Web3(window.ethereum);
+      } else {
+        alert("No ETH brower extension detected.");
+      }
+
+      // Load in Localstore key
+      window.userAddress = window.localStorage.getItem("userAddress");
+      showAddress();
+    };
+    function showAddress() {
+      if (!window.userAddress) {
+        document.getElementById("userAddress").innerText = "";
+        document.getElementsByClassName("Login").style.visibility = 'hidden'
+        document.getElementById("logoutButton").classList.add("hidden");
+        return false;
+      }
+
+      document.getElementById(
+        "userAddress"
+      ).innerText = `ETH Address: ${truncateAddress(window.userAddress)}`;
+      document.getElementById("logoutButton").classList.remove("hidden");
+    }
+
+     function truncateAddress(address) {
+      if (!address) {
+        return "";
+      }
+      return `${address.substr(0, 5)}...${address.substr(
+        address.length - 5,
+        address.length
+      )}`;
+    }
+    // remove stored user address and reset frontend
+    function logout() {
+      window.userAddress = null;
+      window.localStorage.removeItem("userAddress");
+      showAddress();
+    }
+   async function loginWithETH() {
+      if (window.web3) {
+        try {
+          // We use this since ethereum.enable() is deprecated. This method is not
+          // available in Web3JS - so we call it directly from metamasks' library
+          const selectedAccount = await window.ethereum
+            .request({
+              method: "eth_requestAccounts",
+            })
+            .then((accounts) => accounts[0])
+            .catch(() => {
+              throw Error("No account selected!");
+            });
+          window.userAddress = selectedAccount;
+          window.localStorage.setItem("userAddress", selectedAccount);
+          showAddress();
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        alert("No ETH brower extension detected.");
+      }
+    }
+</script>
 
 </body>
 </html>
