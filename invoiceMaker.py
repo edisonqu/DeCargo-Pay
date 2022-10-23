@@ -6,7 +6,7 @@ img = Image.open("invoice.png")
 font = ImageFont.truetype("Montserrat Bold 700.ttf",24)
 
 invoice = "12312321"
-vendor = "Edison LLD"
+vendor = "Edison TLD"
 payer ="Johnson LLD"
 totalAmount ="$3252"
 item ="Halls Candy"

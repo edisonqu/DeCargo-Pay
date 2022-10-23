@@ -8,13 +8,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-
-def pilImgToB64(img: Image):
-    output = BytesIO()
-    img.save(output, format='JPEG')
-    img_b64 = base64.b64encode(output.getvalue())
-
-    return img_b64.decode("ascii")
+#
+# def pilImgToB64(img: Image):
+#     output = BytesIO()
+#     img.save(output, format='JPEG')
+#     img_b64 = base64.b64encode(output.getvalue())
+#
+#     return img_b64.decode("ascii")
 
 
 
