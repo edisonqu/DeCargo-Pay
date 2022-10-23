@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel = "stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <script type = "text/javascript" src="{{url_for('static', filename='script/main.js')}}"></script>
+
+</head>
+<body>
+<h2>DeCargo-Pay</h2>
+    <form onsubmit="takeValue()">
+        <h4>Vendor Name?</h4>
+        <input type="text" id = "vendor" name = 'vendor'>
+        <h4>type?</h4>
+        <input type="text" id = "type" name = 'type'>
+        <h4>number?</h4>
+        <input type="number" id = "number" name = 'number'>
+        <h4>total amount?</h4>
+        <input type="number" id = "totalAmount" name = 'totalAmount'>
+
+        <label>
+            <input type="submit">submit</input>
+        </label>
+
+    </form>
+
+
+</body>
+</html>

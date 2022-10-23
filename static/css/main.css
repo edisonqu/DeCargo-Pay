@@ -1,0 +1,20 @@
+
+
+form{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+h4, h2{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+button{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
